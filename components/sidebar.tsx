@@ -84,22 +84,22 @@ const Sidebar = () => {
         </Box>
         <Box>
           <List spacing={2}>
-              {musicMenu.map(menu => (
-                <ListItem padding="20px" fontSize="16px" key={menu.name}>
-                  <LinkBox>
-                   <NextLink href={menu.route} passHref>
-                     <LinkOverlay>
+            {musicMenu.map((menu) => (
+              <ListItem padding="20px" fontSize="16px" key={menu.name}>
+                <LinkBox>
+                  <NextLink href={menu.route} passHref>
+                    <LinkOverlay>
                       <ListIcon
                         as={menu.icon}
                         color="white"
                         marginRight="20px"
                       />
                       {menu.name}
-                     </LinkOverlay>
-                   </NextLink>
+                    </LinkOverlay>
+                  </NextLink>
                 </LinkBox>
-                </ListItem>
-              ))}
+              </ListItem>
+            ))}
           </List>
         </Box>
       </Box>
