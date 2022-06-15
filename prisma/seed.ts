@@ -1,3 +1,4 @@
+import { useRadio } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { artistsData } from "./songsData";
@@ -33,6 +34,26 @@ const run = async () => {
       password: bcrypt.hashSync("password", salt),
     },
   });
+
+  const songs = await prisma.song.findMany({});
+  await Promise.all(
+    new Array(10).fill(1).map(async (_, i) => {
+      return prisma.playlist.create({
+        data: {
+          name: `Playlist #${i + 1}`,
+          user: {
+            connect: { id: user.id },
+          },
+          songs: {
+            connect: songs.map((song) => ({
+              id: song.id,
+            })),
+          },
+        },
+      });
+    })
+  );
+  // Move this down
 };
 
 run()
